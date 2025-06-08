@@ -1,5 +1,11 @@
 package com.game;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public  class Wordle {
@@ -42,10 +48,26 @@ public  class Wordle {
         return result;
     }
 
-    public static void main(String[] args) {
-        
+    public static List<String> loadWords(String filePath) throws IOException {
+        List<String> words = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String word = line.trim().toLowerCase();
+                if (word.length() == 5) {
+                    words.add(word);
+                }
+            }
+        }
+        return words;
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        List<String> words = loadWords("src/main/resources/words.txt");
         Scanner sc = new Scanner(System.in);
-        String secret = "apple";  // hardcoded for now
+
+        String secret = words.get(new Random().nextInt(1,5));
         Wordle checker = new Wordle(secret);
 
         System.out.println("Welcome to Wordle!");
