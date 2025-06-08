@@ -26,4 +26,19 @@ public class WordleTest {
         assertEquals("yellow", feedback[4]);
     }
 
+    @Test
+    public void testTooManyRepeatsNotAllYellow() {
+        Wordle wordle = new Wordle("water");
+        String[] feedback = wordle.checkGuess("otter");
+
+        int yellowCount = 0;
+        int greenCount = 0;
+        for (String fb : feedback) {
+            if (fb.equals("yellow")) yellowCount++;
+            if (fb.equals("green")) greenCount++;
+        }
+        assertTrue(yellowCount + greenCount <= 1 + 3);
+    }
+
+
 }
