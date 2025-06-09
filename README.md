@@ -37,7 +37,7 @@ src/main/resources/words.txt
 git clone <your-repo-url>
 cd SportRadar
 
- 2. Clone or Download the Project
+ 2. Build the application
 mvn clean compile
 
  3. Run the application:
